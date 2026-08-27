@@ -1,0 +1,3 @@
+{ "gaFileId": "ga-000123", "bucket": "ess-client-acme-sbx", "key": "inbound/2026/08/25/claims.csv",
+  "versionId": "3HL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY", "etag": "d41d8cd98f00b204e9800998ecf8427e", "size": 4096,
+  "uploader": "user@example.gov", "uploadedAt": "2026-08-25T14:03:11Z", "params": { "priority": "normal" } }

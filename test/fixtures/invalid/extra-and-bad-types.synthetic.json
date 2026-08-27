@@ -1,0 +1,2 @@
+{ "_expect": ["unexpected: foo", "etag: does not match ^[A-Fa-f0-9]{32}(-[0-9]+)?$", "size: must be integer", "uploadedAt: invalid date-time"],
+  "gaFileId": "ga-1", "bucket": "abc", "key": "k", "etag": "nope", "size": "1", "uploader": "u", "uploadedAt": "yesterday", "foo": 1 }

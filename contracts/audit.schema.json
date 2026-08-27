@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audit.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ts", "svc", "env", "event", "outcome", "reqId"],
+  "properties": {
+    "ts":       { "type": "string", "format": "date-time" },
+    "svc":      { "const": "ess-ufm-file-intake-service" },
+    "env":      { "type": "string" },
+    "event":    { "enum": ["REGISTER","DUPLICATE","REPROCESS","REJECT","SWEEP_FOUND"] },
+    "outcome":  { "enum": ["OK","DENIED","INVALID","CONFLICT","ERROR"] },
+    "reqId":    { "type": "string" },
+    "regId":    { "type": "string" },
+    "idemKey":  { "type": "string" },
+    "uploader": { "type": "string" },
+    "detail":   { "type": "string", "maxLength": 512 }
+  }
+}

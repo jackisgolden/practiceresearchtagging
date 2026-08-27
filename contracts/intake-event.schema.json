@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "intake-event.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gaFileId", "bucket", "key", "etag", "size", "uploader", "uploadedAt"],
+  "properties": {
+    "gaFileId":   { "type": "string", "minLength": 1, "maxLength": 128 },
+    "bucket":     { "type": "string", "minLength": 3, "maxLength": 63 },
+    "key":        { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "versionId":  { "type": "string", "maxLength": 1024 },
+    "etag":       { "type": "string", "pattern": "^[A-Fa-f0-9]{32}(-[0-9]+)?$" },
+    "size":       { "type": "integer", "minimum": 0 },
+    "uploader":   { "type": "string", "minLength": 1, "maxLength": 256 },
+    "uploadedAt": { "type": "string", "format": "date-time" },
+    "params":     { "type": "object", "additionalProperties": true }
+  }
+}

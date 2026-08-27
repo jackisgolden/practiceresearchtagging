@@ -1,0 +1,29 @@
+{
+  "family": "ess-ufm-file-intake-service",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws-us-gov:iam::291925527748:role/ess-ufm-intake-exec",
+  "taskRoleArn": "arn:aws-us-gov:iam::291925527748:role/ess-ufm-intake-task",
+  "containerDefinitions": [{
+    "name": "intake",
+    "image": "291925527748.dkr.ecr.us-gov-west-1.amazonaws.com/ess-ufm-file-intake-service:${IMAGE_TAG}",
+    "portMappings": [{ "containerPort": 8080, "protocol": "tcp" }],
+    "essential": true,
+    "environment": [
+      { "name": "ENVIRONMENT", "value": "${ENVIRONMENT}" },
+      { "name": "AWS_REGION", "value": "us-gov-west-1" },
+      { "name": "LEDGER_TABLE", "value": "ess-ufm-file-registrations-${ENVIRONMENT}" },
+      { "name": "AUDIT_BUCKET", "value": "ess-ufm-audit-${ENVIRONMENT}" },
+      { "name": "AUDIT_PREFIX", "value": "intake/audit/" },
+      { "name": "HMAC_SECRET_ARN", "value": "arn:aws-us-gov:secretsmanager:us-gov-west-1:291925527748:secret:ess-ufm/intake/hmac-${ENVIRONMENT}" },
+      { "name": "REPLAY_WINDOW_SEC", "value": "300" },
+      { "name": "LOG_LEVEL", "value": "info" },
+      { "name": "SWEEPER_ENABLED", "value": "false" }
+    ],
+    "logConfiguration": { "logDriver": "awslogs", "options": {
+      "awslogs-group": "/ecs/ess-ufm-file-intake-service", "awslogs-region": "us-gov-west-1", "awslogs-stream-prefix": "${ENVIRONMENT}" } },
+    "healthCheck": { "command": ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/readyz || exit 1"], "interval": 30, "timeout": 5, "retries": 3, "startPeriod": 20 }
+  }]
+}

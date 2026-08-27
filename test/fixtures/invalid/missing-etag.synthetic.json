@@ -1,0 +1,2 @@
+{ "_expect": ["missing: etag"],
+  "gaFileId": "ga-1", "bucket": "abc", "key": "k", "size": 1, "uploader": "u", "uploadedAt": "2026-08-25T00:00:00Z" }

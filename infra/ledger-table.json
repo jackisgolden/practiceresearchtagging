@@ -1,0 +1,16 @@
+{
+  "TableName": "ess-ufm-file-registrations-${ENVIRONMENT}",
+  "BillingMode": "PAY_PER_REQUEST",
+  "AttributeDefinitions": [
+    { "AttributeName": "idemKey", "AttributeType": "S" },
+    { "AttributeName": "id", "AttributeType": "S" },
+    { "AttributeName": "status", "AttributeType": "S" },
+    { "AttributeName": "registeredAt", "AttributeType": "S" }
+  ],
+  "KeySchema": [{ "AttributeName": "idemKey", "KeyType": "HASH" }],
+  "GlobalSecondaryIndexes": [
+    { "IndexName": "by-id", "KeySchema": [{ "AttributeName": "id", "KeyType": "HASH" }], "Projection": { "ProjectionType": "ALL" } },
+    { "IndexName": "by-status", "KeySchema": [{ "AttributeName": "status", "KeyType": "HASH" }, { "AttributeName": "registeredAt", "KeyType": "RANGE" }], "Projection": { "ProjectionType": "ALL" } }
+  ],
+  "SSESpecification": { "Enabled": true, "SSEType": "KMS" }
+}

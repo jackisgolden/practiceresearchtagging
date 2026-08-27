@@ -1,0 +1,15 @@
+{
+  "states": ["QUEUED","PROCESSING","CLEAN","FLAGGED","UNPROCESSABLE","FAILED"],
+  "initial": "QUEUED",
+  "terminal": ["CLEAN","FLAGGED","UNPROCESSABLE"],
+  "transitions": [
+    { "from": null,            "to": "QUEUED",        "owner": "intake",  "via": "POST /registrations" },
+    { "from": "FAILED",        "to": "QUEUED",        "owner": "intake",  "via": "POST /registrations/{id}/reprocess" },
+    { "from": "UNPROCESSABLE", "to": "QUEUED",        "owner": "intake",  "via": "POST /registrations/{id}/reprocess" },
+    { "from": "QUEUED",        "to": "PROCESSING",    "owner": "lambda" },
+    { "from": "PROCESSING",    "to": "CLEAN",         "owner": "lambda" },
+    { "from": "PROCESSING",    "to": "FLAGGED",       "owner": "lambda" },
+    { "from": "PROCESSING",    "to": "UNPROCESSABLE", "owner": "lambda" },
+    { "from": "PROCESSING",    "to": "FAILED",        "owner": "lambda" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "registration.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "idemKey", "status", "attempt", "gaFileId", "bucket", "key",
+               "etag", "size", "uploader", "uploadedAt", "registeredAt", "updatedAt"],
+  "properties": {
+    "id":           { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "idemKey":      { "type": "string" },
+    "status":       { "enum": ["QUEUED","PROCESSING","CLEAN","FLAGGED","UNPROCESSABLE","FAILED"] },
+    "attempt":      { "type": "integer", "minimum": 1 },
+    "gaFileId":     { "type": "string" },
+    "bucket":       { "type": "string" },
+    "key":          { "type": "string" },
+    "versionId":    { "type": "string" },
+    "etag":         { "type": "string" },
+    "size":         { "type": "integer" },
+    "uploader":     { "type": "string" },
+    "uploadedAt":   { "type": "string", "format": "date-time" },
+    "params":       { "type": "object" },
+    "registeredAt": { "type": "string", "format": "date-time" },
+    "updatedAt":    { "type": "string", "format": "date-time" },
+    "lastError":    { "type": "string" },
+    "ttl":          { "type": "integer" }
+  }
+}
